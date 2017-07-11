@@ -40,6 +40,12 @@ class DatabaseSeeder extends Seeder
             ['name' => 'san francisco']
         );
 
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'lrodriguez@sparkdigital.com',
+            'password' => '$2y$10$eAJh9YJz.DYtWhg80dGfpuFQReXFCh82l/U2.bRSWr/0AUBbOB9QW',
+        ]); 
+
         $this->command->info('WWE test app seeds finished.');
     }
 }
