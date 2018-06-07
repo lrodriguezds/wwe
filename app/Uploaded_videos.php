@@ -11,7 +11,12 @@ class Uploaded_videos extends Model
     *
     * @var array
     */
-    protected $fillable = ['title', 'url', 'location_id', 'duration', 'file_size', 'format', 'bit_rate'];
+    protected $fillable = ['title', 'url', 'user_id', 'location_id', 'duration', 'file_size', 'format', 'bit_rate'];
+
+    public function uploadedBy()
+    {
+        return $this->hasOne('App\User', 'id', 'user_id');
+    }
 
     public function location()
     {
@@ -22,4 +27,5 @@ class Uploaded_videos extends Model
     {
         return $this->belongsToMany('App\Meta_keywords', 'keywords_by_videos', 'video_id', 'keyword_id');
     }
+
 }

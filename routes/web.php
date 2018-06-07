@@ -19,16 +19,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('videos', 'VideoController');
+Route::group(['middleware' => 'auth'], function () {
+    
+    Route::get('/videos', 'VideoController@index');
+    Route::get('/videos/create', 'VideoController@create');
+    Route::post('/videos', 'VideoController@store');
+    Route::get('/videos/{id}', ['middleware' => 'check-video', 'uses' => 'VideoController@show']);
 
-Route::get('/video/{filename}', function ($filename) {
+    Route::get('/video/{filename}', 'VideoController@stream');
 
-    $videosDir = base_path('public/uploads');
-    if (file_exists($filePath = $videosDir."/".$filename)) {
-        $stream = new \App\Http\VideoStream($filePath);
-        return response()->stream(function() use ($stream) {
-            $stream->start();
-        });
-    }
-    return response("File doesn't exists", 404);
+    Route::post('/videos/metadata', 'VideoController@storeMetadata');
+
+    Route::get('/liked-videos', 'VideoController@likedList');
+    Route::get('/videos/{id}/like', 'VideoController@like');
+    Route::get('/videos/{id}/unlike', 'VideoController@unlike');
 });
+

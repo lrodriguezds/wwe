@@ -22,6 +22,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+    .v-bottom {
+    float: none;
+    display: table-cell;
+    vertical-align: bottom;
+}
+    </style>
 </head>
 <body>
     <div id="app">

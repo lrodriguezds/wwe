@@ -5,8 +5,9 @@
 
 @include('layouts.menu')
 
-<h1>List of videos</h1>
+<h1>Liked videos</h1>
 
+<!-- will be used to show any messages -->
 @if (Session::has('message'))
     <div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
@@ -16,7 +17,6 @@
         <tr>
             <td>ID</td>
             <td>Title</td>
-            <td>Uploaded by</td>
             <td>Location</td>
             <td>Extra info</td>
             <td>Actions</td>
@@ -27,7 +27,6 @@
         <tr>
             <td>{{ $value->id }}</td>
             <td>{{ $value->title }}</td>
-            <td>{{ $value->uploadedBy->name }}</td>
             <td>{{ $value->location->name }}</td>
             <td>
             Duration: {{ $value->duration }}<br>
